@@ -82,11 +82,95 @@
 
 
 @layer base {
+  :root {
+    --background: 215 21% 11%;
+    --foreground: 213 32% 92%;
+    --card: 215 21% 11%;
+    --card-foreground: 213 32% 92%;
+    --popover: 215 28% 9%;
+    --popover-foreground: 213 32% 92%;
+    --primary: 137 55% 36%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 213 18% 16%;
+    --secondary-foreground: 213 32% 92%;
+    --muted: 213 18% 16%;
+    --muted-foreground: 212 9% 65%;
+    --accent: 213 18% 16%;
+    --accent-foreground: 213 32% 92%;
+    --destructive: 5 100% 72%;
+    --destructive-foreground: 220 25% 8%;
+    --border: 212 14% 20%;
+    --input: 212 14% 20%;
+    --ring: 212 92% 55%;
+  }
+
   * {
     @apply border-border outline-ring/50;
   }
 
   body {
     @apply bg-background text-foreground font-body;
+    background-color: #0d1117;
+    color: #e6edf3;
   }
+}
+
+/* GitHub dark surface mapping for the app's legacy light palette */
+@layer utilities {
+  .bg-white { background-color: #161b22 !important; }
+  .bg-\[\#f6f8fa\] { background-color: #0d1117 !important; }
+  .bg-\[\#f6f6f7\],
+  .bg-\[\#f1f1f1\] { background-color: #21262d !important; }
+  .bg-\[\#1a1a1a\] { background-color: #238636 !important; }
+  .bg-\[\#1a1a1a\]:hover,
+  .hover\:bg-\[\#303030\]:hover { background-color: #2ea043 !important; }
+  .hover\:bg-\[\#f6f6f7\]:hover,
+  .hover\:bg-\[\#f6f8fa\]:hover { background-color: #21262d !important; }
+  .bg-\[\#fdeeeb\] { background-color: #2d1214 !important; }
+  .bg-\[\#e5f5f0\] { background-color: #10281d !important; }
+  .bg-\[\#fff8db\],
+  .bg-\[\#fffbe6\] { background-color: #2b2413 !important; }
+
+  .border-\[\#e3e3e3\],
+  .border-\[\#d1d9e0\],
+  .border-\[\#f1f1f1\] { border-color: #30363d !important; }
+  .divide-\[\#f1f1f1\] > :not([hidden]) ~ :not([hidden]) { border-color: #21262d !important; }
+  .divide-\[\#e3e3e3\] > :not([hidden]) ~ :not([hidden]) { border-color: #30363d !important; }
+
+  .text-\[\#1a1a1a\],
+  .text-\[\#1f2328\],
+  .text-\[\#202223\] { color: #e6edf3 !important; }
+  .text-\[\#616161\],
+  .text-\[\#6d7175\] { color: #9198a1 !important; }
+  .text-\[\#8a8a8a\] { color: #7d8590 !important; }
+  .text-\[\#b3260c\],
+  .text-\[\#d72c0d\] { color: #ff7b72 !important; }
+  .text-\[\#006b55\],
+  .text-\[\#008060\] { color: #3fb950 !important; }
+  .hover\:text-\[\#008060\]:hover { color: #3fb950 !important; }
+
+  .bg-\[\#fafafa\] { background-color: #0d1117 !important; }
+  .bg-\[\#fff1e3\] { background-color: #2b2413 !important; }
+  .bg-\[\#e6f4ec\],
+  .bg-\[\#e3f1df\] { background-color: #10281d !important; }
+  .bg-\[\#e3e3e3\] { background-color: #30363d !important; }
+  .bg-\[\#d72c0d\] { background-color: #f85149 !important; }
+  .bg-\[\#008060\] { background-color: #3fb950 !important; }
+  .text-\[\#303030\] { color: #c9d1d9 !important; }
+  .text-\[\#b5b5b5\],
+  .text-\[\#c9cccf\] { color: #6e7681 !important; }
+  .text-\[\#8a5300\] { color: #d29922 !important; }
+  .hover\:text-\[\#1a1a1a\]:hover { color: #e6edf3 !important; }
+  .hover\:text-\[\#d72c0d\]:hover { color: #ff7b72 !important; }
+  .hover\:border-\[\#c9cccf\]:hover { border-color: #484f58 !important; }
+
+  /* Notice callouts */
+  .bg-\[\#f0f6ff\] { background-color: #121d2f !important; }
+  .border-\[\#b3d4ff\] { border-color: #1f6feb !important; }
+  .text-\[\#2c6ecb\] { color: #58a6ff !important; }
+  .bg-\[\#fff5ea\] { background-color: #2b2413 !important; }
+  .border-\[\#ffd79d\] { border-color: #9e6a03 !important; }
+  .text-\[\#b98900\] { color: #d29922 !important; }
+  .bg-\[\#fff4f4\] { background-color: #2d1214 !important; }
+  .border-\[\#ffb3ab\] { border-color: #da3633 !important; }
 }

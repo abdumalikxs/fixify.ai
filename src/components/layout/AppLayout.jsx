@@ -18,7 +18,7 @@ export default function AppLayout() {
 
   return (
     <div className="min-h-screen bg-[#f6f8fa] text-[#1f2328] font-body">
-      <header className="sticky top-0 z-40 flex items-center gap-4 bg-[#24292f] px-4 py-2.5 text-[#f0f6fc] sm:px-6">
+      <header className="sticky top-0 z-40 flex items-center gap-4 border-b border-[#30363d] bg-[#161b22] px-4 py-2.5 text-[#f0f6fc] sm:px-6">
         <button className="lg:hidden text-[#c8d1d9]" onClick={() => setOpen(!open)}>
           {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
