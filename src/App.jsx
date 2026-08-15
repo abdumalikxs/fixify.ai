@@ -22,6 +22,7 @@ import HealedIssues from '@/pages/HealedIssues';
 import ThemeAudit from '@/pages/ThemeAudit';
 import Settings from '@/pages/Settings';
 import Store from '@/pages/Store';
+import Pitch from '@/pages/Pitch';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -63,6 +64,7 @@ const AuthenticatedApp = () => {
           <Route path="/healed" element={<HealedIssues />} />
           <Route path="/theme-audit" element={<ThemeAudit />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/pitch" element={<Pitch />} />
         </Route>
         <Route path="/store" element={<Store />} />
       </Route>
