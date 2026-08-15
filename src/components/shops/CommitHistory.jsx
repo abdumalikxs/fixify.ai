@@ -3,6 +3,7 @@ import { base44 } from "@/api/base44Client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ExternalLink, Search } from "lucide-react";
+import RepoNotice from "./RepoNotice";
 
 export default function CommitHistory({ repo }) {
   const [branches, setBranches] = useState([]);
@@ -29,7 +30,7 @@ export default function CommitHistory({ repo }) {
       setHasMore(!!data.has_more);
       setPage(targetPage);
     } catch (e) {
-      setError(e?.response?.data?.error || "Could not load commit history.");
+      setError(e?.response?.data?.error || e?.message || "Could not load commit history.");
     }
     setLoading(false);
   }, [repo.full_name]);
@@ -74,7 +75,7 @@ export default function CommitHistory({ repo }) {
         </div>
       </div>
 
-      {error && <p className="px-4 py-3 text-xs text-[#d72c0d]">{error}</p>}
+      {error && <RepoNotice rawError={error} />}
 
       <div className="divide-y divide-[#f1f1f1]">
         {filtered.map((c) => (
@@ -100,7 +101,7 @@ export default function CommitHistory({ repo }) {
             </a>
           </div>
         ))}
-        {!loading && filtered.length === 0 && (
+        {!loading && !error && filtered.length === 0 && (
           <p className="px-4 py-6 text-center text-xs text-[#8a8a8a]">No commits match.</p>
         )}
       </div>
@@ -111,7 +112,7 @@ export default function CommitHistory({ repo }) {
         ) : hasMore ? (
           <Button size="sm" variant="outline" onClick={() => load(branch, page + 1)}>Load more</Button>
         ) : (
-          <p className="text-xs text-[#8a8a8a]">End of history.</p>
+          <p className="text-xs text-[#8a8a8a]">{error ? "Nothing to show yet." : "End of history."}</p>
         )}
       </div>
     </div>
