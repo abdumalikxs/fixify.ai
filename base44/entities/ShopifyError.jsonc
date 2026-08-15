@@ -1,0 +1,34 @@
+{
+  "name": "ShopifyError",
+  "type": "object",
+  "properties": {
+    "store_name": {
+      "type": "string"
+    },
+    "file_path": {
+      "type": "string"
+    },
+    "error_type": {
+      "type": "string"
+    },
+    "broken_code": {
+      "type": "string"
+    },
+    "healed_code": {
+      "type": "string"
+    },
+    "resolution_status": {
+      "type": "string",
+      "enum": [
+        "Unresolved",
+        "Auto-Healed & Deployed"
+      ],
+      "default": "Unresolved"
+    }
+  },
+  "required": [
+    "store_name",
+    "file_path",
+    "error_type"
+  ]
+}

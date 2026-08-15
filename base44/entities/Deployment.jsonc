@@ -1,0 +1,41 @@
+{
+  "name": "Deployment",
+  "type": "object",
+  "properties": {
+    "repo_name": {
+      "type": "string"
+    },
+    "commit_hash": {
+      "type": "string"
+    },
+    "branch": {
+      "type": "string"
+    },
+    "pipeline_status": {
+      "type": "string",
+      "enum": [
+        "Failed",
+        "Passed"
+      ],
+      "default": "Failed"
+    },
+    "error_summary": {
+      "type": "string"
+    },
+    "commit_message": {
+      "type": "string"
+    },
+    "author": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "repo_name",
+    "commit_hash",
+    "pipeline_status"
+  ]
+}
