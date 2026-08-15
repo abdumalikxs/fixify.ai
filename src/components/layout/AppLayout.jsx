@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
+import FixifyLogo from "@/components/layout/FixifyLogo";
 import { LayoutDashboard, GitBranch, Settings, Menu, X, Bot, Store, Glasses, FileJson } from "lucide-react";
 
 const sections = [
@@ -38,8 +39,8 @@ export default function AppLayout() {
           {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
         <Link to="/" className="flex items-center gap-2 text-sm font-semibold tracking-tight">
-          <Bot className="h-5 w-5" />
-          Fixify<span className="font-normal text-[#8b949e]">/</span>
+          <FixifyLogo className="h-6 w-6" />
+          fixfiy<span className="font-normal text-[#8b949e]">/</span>
           <span className="font-normal">autopilot</span>
         </Link>
         <div className="ml-auto flex items-center gap-3">
