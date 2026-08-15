@@ -40,7 +40,7 @@ export default function AppLayout() {
         </button>
         <Link to="/" className="flex items-center gap-2 text-sm font-semibold tracking-tight">
           <FixifyLogo className="h-6 w-6" />
-          fixfiy<span className="font-normal text-[#8b949e]">/</span>
+          Fixfy<span className="font-normal text-[#8b949e]">/</span>
           <span className="font-normal">autopilot</span>
         </Link>
         <div className="ml-auto flex items-center gap-3">
