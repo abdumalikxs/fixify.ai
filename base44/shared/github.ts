@@ -57,6 +57,17 @@ export async function listFailedRuns(token, repo, perPage = 5) {
   return data.workflow_runs || [];
 }
 
+export async function getRun(token, repo, runId) {
+  return gh(token, `/repos/${repo}/actions/runs/${runId}`);
+}
+
+export async function getRepoTree(token, repo, ref, prefix = "") {
+  const data = await gh(token, `/repos/${repo}/git/trees/${encodeURIComponent(ref)}?recursive=1`);
+  const paths = (data.tree || []).filter((n) => n.type === "blob").map((n) => n.path);
+  const filtered = prefix ? paths.filter((p) => p.startsWith(prefix)) : paths;
+  return { paths: filtered.slice(0, 400), truncated: filtered.length > 400 || !!data.truncated };
+}
+
 export async function listJobs(token, repo, runId) {
   const data = await gh(token, `/repos/${repo}/actions/runs/${runId}/jobs?per_page=30`);
   return data.jobs || [];
