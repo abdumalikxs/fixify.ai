@@ -1,0 +1,77 @@
+{
+  "name": "FixProposal",
+  "type": "object",
+  "properties": {
+    "repo_full_name": {
+      "type": "string"
+    },
+    "run_id": {
+      "type": "number"
+    },
+    "run_url": {
+      "type": "string"
+    },
+    "workflow_name": {
+      "type": "string"
+    },
+    "job_name": {
+      "type": "string"
+    },
+    "branch": {
+      "type": "string"
+    },
+    "commit_sha": {
+      "type": "string"
+    },
+    "commit_message": {
+      "type": "string"
+    },
+    "error_type": {
+      "type": "string"
+    },
+    "failure_summary": {
+      "type": "string"
+    },
+    "log_excerpt": {
+      "type": "string"
+    },
+    "file_path": {
+      "type": "string"
+    },
+    "broken_code": {
+      "type": "string"
+    },
+    "proposed_code": {
+      "type": "string"
+    },
+    "explanation": {
+      "type": "string"
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Proposed",
+        "Approved",
+        "Dismissed",
+        "Diagnosis only"
+      ],
+      "default": "Proposed"
+    },
+    "pr_url": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "repo_full_name",
+    "run_id",
+    "status"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "name": "MonitoredRepo",
+  "type": "object",
+  "properties": {
+    "full_name": {
+      "type": "string"
+    },
+    "default_branch": {
+      "type": "string",
+      "default": "main"
+    },
+    "enabled": {
+      "type": "boolean",
+      "default": true
+    },
+    "last_run_id": {
+      "type": "number"
+    },
+    "last_scanned_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "full_name"
+  ]
+}

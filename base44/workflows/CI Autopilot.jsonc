@@ -1,0 +1,45 @@
+{
+  "name": "CI Autopilot",
+  "description": "Every 5 minutes, checks monitored GitHub repos for newly failed Actions runs, diagnoses them with AI and drafts a fix proposal for in-app approval.",
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "ci_autopilot",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "scan_pipelines": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "scanPipelines",
+            "args": {}
+          },
+          "then": "end",
+          "x-base44": {
+            "title": "Scan failed runs",
+            "description": "Diagnose and draft fixes"
+          }
+        }
+      }
+    ]
+  },
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "scheduled",
+      "events": [],
+      "schedule_mode": "recurring",
+      "cron_expression": "*/5 * * * *",
+      "one_time_date": null,
+      "timezone": "UTC",
+      "interval_value": null,
+      "interval_unit": null,
+      "interval_anchor": null,
+      "ends_type": "never",
+      "ends_on_date": null,
+      "ends_after_count": null
+    }
+  }
+}

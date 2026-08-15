@@ -15,6 +15,7 @@ import ResetPassword from '@/pages/ResetPassword';
 import AppLayout from '@/components/layout/AppLayout';
 import Dashboard from '@/pages/Dashboard';
 import Pipelines from '@/pages/Pipelines';
+import Autopilot from '@/pages/Autopilot';
 import HealedIssues from '@/pages/HealedIssues';
 import Settings from '@/pages/Settings';
 
@@ -52,6 +53,7 @@ const AuthenticatedApp = () => {
         <Route element={<AppLayout />}>
           <Route path="/" element={<Dashboard />} />
           <Route path="/pipelines" element={<Pipelines />} />
+          <Route path="/autopilot" element={<Autopilot />} />
           <Route path="/healed" element={<HealedIssues />} />
           <Route path="/settings" element={<Settings />} />
         </Route>
