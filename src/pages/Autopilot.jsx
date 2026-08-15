@@ -40,10 +40,10 @@ export default function Autopilot() {
   return (
     <div className="mx-auto max-w-5xl space-y-6">
       <div>
-        <h1 className="text-xl font-semibold tracking-tight">CI/CD Autopilot</h1>
+        <h1 className="text-xl font-semibold tracking-tight">Theme deploy autopilot</h1>
         <p className="mt-1 text-sm text-[#616161]">
-          The agent watches your GitHub Actions runs, diagnoses failures from the real job logs, and drafts a patch. Nothing
-          is pushed until you approve it.
+          Add Shopify Theme Check to a theme repository, and the agent watches its runs — reading the real job logs,
+          locating the broken Liquid or JSON, and drafting a patch. Nothing is pushed until you approve it.
         </p>
       </div>
 
@@ -56,7 +56,7 @@ export default function Autopilot() {
           <div className="h-6 w-6 animate-spin rounded-full border-2 border-[#e3e3e3] border-t-[#008060]" />
         ) : proposals.length === 0 ? (
           <p className="rounded-lg border border-dashed border-[#e3e3e3] bg-white px-4 py-8 text-center text-sm text-[#8a8a8a]">
-            No failures analysed yet. Monitor a repository, then run a scan.
+            No failures analysed yet. Monitor a theme repository, add Theme Check, then run a scan.
           </p>
         ) : (
           Object.entries(

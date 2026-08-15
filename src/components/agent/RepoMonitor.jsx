@@ -3,6 +3,7 @@ import { base44 } from "@/api/base44Client";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { RefreshCw, Plus } from "lucide-react";
+import ThemeCheckButton from "@/components/agent/ThemeCheckButton";
 
 export default function RepoMonitor({ monitored, onChange, onScan, scanning }) {
   const [repos, setRepos] = useState([]);
@@ -35,8 +36,10 @@ export default function RepoMonitor({ monitored, onChange, onScan, scanning }) {
     <div className="rounded-lg border border-[#e3e3e3] bg-white">
       <div className="flex items-center justify-between border-b border-[#e3e3e3] px-4 py-3">
         <div>
-          <p className="text-sm font-medium">Monitored repositories</p>
-          <p className="text-xs text-[#616161]">The agent checks failed Actions runs every 5 minutes.</p>
+          <p className="text-sm font-medium">Monitored theme repositories</p>
+          <p className="text-xs text-[#616161]">
+            The agent checks failed Theme Check &amp; CI runs every 5 minutes.
+          </p>
         </div>
         <Button size="sm" variant="outline" onClick={onScan} disabled={scanning}>
           <RefreshCw className={`mr-2 h-3.5 w-3.5 ${scanning ? "animate-spin" : ""}`} />
@@ -55,7 +58,10 @@ export default function RepoMonitor({ monitored, onChange, onScan, scanning }) {
                 {rec.last_scanned_at ? `last checked ${new Date(rec.last_scanned_at).toLocaleString()}` : "not checked yet"}
               </p>
             </div>
-            <Switch checked={!!rec.enabled} onCheckedChange={(v) => toggle(rec, v)} />
+            <div className="flex shrink-0 items-center gap-3">
+              <ThemeCheckButton repo={rec} onChange={onChange} />
+              <Switch checked={!!rec.enabled} onCheckedChange={(v) => toggle(rec, v)} />
+            </div>
           </div>
         ))}
 

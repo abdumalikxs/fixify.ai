@@ -5,7 +5,7 @@ import StoreSelector from "./StoreSelector";
 
 const nav = [
   { label: "Overview", path: "/", icon: LayoutDashboard },
-  { label: "Pipelines", path: "/pipelines", icon: GitBranch },
+  { label: "Theme deploys", path: "/pipelines", icon: GitBranch },
   { label: "Autopilot", path: "/autopilot", icon: Bot },
   { label: "Connected shops", path: "/shops", icon: Store },
   { label: "Healed issues", path: "/healed", icon: ShieldCheck },
