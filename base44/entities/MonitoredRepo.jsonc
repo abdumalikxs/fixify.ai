@@ -13,6 +13,9 @@
       "type": "boolean",
       "default": true
     },
+    "shop_id": {
+      "type": "string"
+    },
     "last_run_id": {
       "type": "number"
     },

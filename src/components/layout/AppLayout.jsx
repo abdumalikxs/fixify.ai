@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
-import { LayoutDashboard, GitBranch, ShieldCheck, Settings, Menu, X, Bot } from "lucide-react";
+import { LayoutDashboard, GitBranch, ShieldCheck, Settings, Menu, X, Bot, Store } from "lucide-react";
 import StoreSelector from "./StoreSelector";
 
 const nav = [
   { label: "Overview", path: "/", icon: LayoutDashboard },
   { label: "Pipelines", path: "/pipelines", icon: GitBranch },
   { label: "Autopilot", path: "/autopilot", icon: Bot },
+  { label: "Connected shops", path: "/shops", icon: Store },
   { label: "Healed issues", path: "/healed", icon: ShieldCheck },
   { label: "Settings", path: "/settings", icon: Settings },
 ];

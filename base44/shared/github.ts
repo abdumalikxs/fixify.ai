@@ -33,6 +33,25 @@ export async function listRepos(token) {
   }));
 }
 
+export async function listBranches(token, repo) {
+  const data = await gh(token, `/repos/${repo}/branches?per_page=100`);
+  return data.map((b) => b.name);
+}
+
+export async function listCommits(token, repo, { branch, page = 1, perPage = 30 } = {}) {
+  const q = new URLSearchParams({ per_page: String(perPage), page: String(page) });
+  if (branch) q.set("sha", branch);
+  const data = await gh(token, `/repos/${repo}/commits?${q.toString()}`);
+  return data.map((c) => ({
+    sha: c.sha,
+    message: c.commit?.message || "",
+    author_name: c.commit?.author?.name || c.author?.login || "unknown",
+    author_avatar: c.author?.avatar_url || null,
+    date: c.commit?.author?.date || null,
+    html_url: c.html_url,
+  }));
+}
+
 export async function listFailedRuns(token, repo, perPage = 5) {
   const data = await gh(token, `/repos/${repo}/actions/runs?status=failure&per_page=${perPage}`);
   return data.workflow_runs || [];
