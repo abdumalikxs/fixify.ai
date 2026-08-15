@@ -20,6 +20,7 @@ import Shops from '@/pages/Shops';
 import ShopDetail from '@/pages/ShopDetail';
 import HealedIssues from '@/pages/HealedIssues';
 import Settings from '@/pages/Settings';
+import Store from '@/pages/Store';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -61,6 +62,7 @@ const AuthenticatedApp = () => {
           <Route path="/healed" element={<HealedIssues />} />
           <Route path="/settings" element={<Settings />} />
         </Route>
+        <Route path="/store" element={<Store />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
-import { LayoutDashboard, GitBranch, ShieldCheck, Settings, Menu, X, Bot, Store } from "lucide-react";
+import { LayoutDashboard, GitBranch, ShieldCheck, Settings, Menu, X, Bot, Store, Glasses } from "lucide-react";
 import StoreSelector from "./StoreSelector";
 
 const nav = [
@@ -10,6 +10,7 @@ const nav = [
   { label: "Connected shops", path: "/shops", icon: Store },
   { label: "Healed issues", path: "/healed", icon: ShieldCheck },
   { label: "Settings", path: "/settings", icon: Settings },
+  { label: "Lumina demo store", path: "/store", icon: Glasses },
 ];
 
 export default function AppLayout() {
