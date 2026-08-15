@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { base44 } from "@/api/base44Client";
 import { Loader2 } from "lucide-react";
 import HealedRepoGroup from "@/components/healed/HealedRepoGroup";
+import FixTabs from "@/components/layout/FixTabs";
 
 export default function HealedIssues() {
   const [fixes, setFixes] = useState([]);
@@ -33,12 +34,14 @@ export default function HealedIssues() {
   return (
     <div className="mx-auto max-w-5xl space-y-5">
       <div>
-        <h1 className="text-xl font-semibold tracking-tight">Healed theme issues</h1>
+        <h1 className="text-xl font-semibold tracking-tight">Autopilot</h1>
         <p className="mt-1 text-sm text-[#616161]">
           Every fix the agent shipped, grouped by repository: the failing theme file, the patch, and the pull request it
           was merged in.
         </p>
       </div>
+
+      <FixTabs />
 
       {fixes.length === 0 ? (
         <p className="rounded-lg border border-dashed border-[#e3e3e3] bg-white px-4 py-10 text-center text-sm text-[#8a8a8a]">

@@ -1,17 +1,31 @@
 import React, { useState } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
-import { LayoutDashboard, GitBranch, ShieldCheck, Settings, Menu, X, Bot, Store, Glasses, FileJson } from "lucide-react";
+import { LayoutDashboard, GitBranch, Settings, Menu, X, Bot, Store, Glasses, FileJson } from "lucide-react";
 import StoreSelector from "./StoreSelector";
 
-const nav = [
-  { label: "Overview", path: "/", icon: LayoutDashboard },
-  { label: "Theme deploys", path: "/pipelines", icon: GitBranch },
-  { label: "Autopilot", path: "/autopilot", icon: Bot },
-  { label: "Theme audit", path: "/theme-audit", icon: FileJson },
-  { label: "Connected shops", path: "/shops", icon: Store },
-  { label: "Healed issues", path: "/healed", icon: ShieldCheck },
-  { label: "Settings", path: "/settings", icon: Settings },
-  { label: "Lumina demo store", path: "/store", icon: Glasses },
+const sections = [
+  {
+    title: "Monitor",
+    items: [
+      { label: "Overview", path: "/", icon: LayoutDashboard },
+      { label: "Deploy history", path: "/pipelines", icon: GitBranch },
+    ],
+  },
+  {
+    title: "Heal",
+    items: [
+      { label: "Autopilot", path: "/autopilot", icon: Bot, alsoActiveOn: ["/healed"] },
+      { label: "Theme audit", path: "/theme-audit", icon: FileJson },
+    ],
+  },
+  {
+    title: "Configure",
+    items: [
+      { label: "Connected shops", path: "/shops", icon: Store },
+      { label: "Settings", path: "/settings", icon: Settings },
+      { label: "Lumina demo store", path: "/store", icon: Glasses },
+    ],
+  },
 ];
 
 export default function AppLayout() {
@@ -44,28 +58,33 @@ export default function AppLayout() {
             open ? "translate-x-0" : "-translate-x-full"
           }`}
         >
-          <nav className="space-y-px">
-            {nav.map(({ label, path, icon: Icon }) => {
-              const active = pathname === path;
-              return (
-                <Link
-                  key={path}
-                  to={path}
-                  onClick={() => setOpen(false)}
-                  className={`relative flex items-center gap-2.5 rounded-md px-3 py-1.5 text-sm transition-colors ${
-                    active
-                      ? "bg-[#f6f8fa] font-semibold text-[#1f2328]"
-                      : "text-[#1f2328] hover:bg-[#f6f8fa]"
-                  }`}
-                >
-                  {active && (
-                    <span className="absolute left-0 top-1.5 bottom-1.5 w-[3px] rounded-full bg-[#fd8c73]" />
-                  )}
-                  <Icon className={`h-4 w-4 ${active ? "text-[#1f2328]" : "text-[#59636e]"}`} />
-                  {label}
-                </Link>
-              );
-            })}
+          <nav className="space-y-4">
+            {sections.map(({ title, items }) => (
+              <div key={title} className="space-y-px">
+                <p className="px-3 pb-1 text-[11px] font-semibold uppercase tracking-wide text-[#8a8a8a]">{title}</p>
+                {items.map(({ label, path, icon: Icon, alsoActiveOn = [] }) => {
+                  const active = pathname === path || alsoActiveOn.includes(pathname);
+                  return (
+                    <Link
+                      key={path}
+                      to={path}
+                      onClick={() => setOpen(false)}
+                      className={`relative flex items-center gap-2.5 rounded-md px-3 py-1.5 text-sm transition-colors ${
+                        active
+                          ? "bg-[#f6f8fa] font-semibold text-[#1f2328]"
+                          : "text-[#1f2328] hover:bg-[#f6f8fa]"
+                      }`}
+                    >
+                      {active && (
+                        <span className="absolute left-0 top-1.5 bottom-1.5 w-[3px] rounded-full bg-[#fd8c73]" />
+                      )}
+                      <Icon className={`h-4 w-4 ${active ? "text-[#1f2328]" : "text-[#59636e]"}`} />
+                      {label}
+                    </Link>
+                  );
+                })}
+              </div>
+            ))}
           </nav>
         </aside>
 

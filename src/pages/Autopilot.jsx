@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { base44 } from "@/api/base44Client";
 import RepoMonitor from "@/components/agent/RepoMonitor";
 import RepoFixGroup from "@/components/agent/RepoFixGroup";
+import FixTabs from "@/components/layout/FixTabs";
 
 export default function Autopilot() {
   const [monitored, setMonitored] = useState([]);
@@ -40,12 +41,14 @@ export default function Autopilot() {
   return (
     <div className="mx-auto max-w-5xl space-y-6">
       <div>
-        <h1 className="text-xl font-semibold tracking-tight">Theme deploy autopilot</h1>
+        <h1 className="text-xl font-semibold tracking-tight">Autopilot</h1>
         <p className="mt-1 text-sm text-[#616161]">
           Add Shopify Theme Check to a theme repository, and the agent watches its runs — reading the real job logs,
           locating the broken Liquid or JSON, and drafting a patch. Nothing is pushed until you approve it.
         </p>
       </div>
+
+      <FixTabs />
 
       <RepoMonitor monitored={monitored} onChange={load} onScan={scan} scanning={scanning} />
       {scanError && <p className="text-xs text-[#d72c0d]">{scanError}</p>}
