@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
-import { LayoutDashboard, GitBranch, Settings, Menu, X, Bot, Store, Glasses, FileJson, Presentation } from "lucide-react";
+import { LayoutDashboard, GitBranch, Settings, Menu, X, Bot, Store, Glasses, FileJson } from "lucide-react";
 
 const sections = [
   {
     title: "Monitor",
     items: [
       { label: "Overview", path: "/", icon: LayoutDashboard },
-      { label: "Demo & pitch", path: "/pitch", icon: Presentation },
       { label: "Deploy history", path: "/pipelines", icon: GitBranch },
     ],
   },
