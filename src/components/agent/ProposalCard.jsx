@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { base44 } from "@/api/base44Client";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Check, X } from "lucide-react";
+import { ExternalLink, Check, X, ChevronRight } from "lucide-react";
 import DiffViewer from "@/components/dashboard/DiffViewer";
 import PrChecks from "@/components/agent/PrChecks";
 
@@ -13,9 +13,10 @@ const STATUS_TONE = {
   "Diagnosis only": "bg-[#f1f1f1] text-[#616161]",
 };
 
-export default function ProposalCard({ proposal, onChange }) {
+export default function ProposalCard({ proposal, onChange, defaultOpen = true }) {
   const [busy, setBusy] = useState("");
   const [error, setError] = useState("");
+  const [open, setOpen] = useState(defaultOpen);
 
   const approve = async () => {
     setBusy("approve");
@@ -38,8 +39,11 @@ export default function ProposalCard({ proposal, onChange }) {
 
   return (
     <div className="rounded-lg border border-[#e3e3e3] bg-white">
-      <div className="flex flex-wrap items-start gap-3 border-b border-[#e3e3e3] px-4 py-3">
-        <div className="min-w-0 flex-1">
+      <div className={`flex flex-wrap items-start gap-3 px-4 py-3 ${open ? "border-b border-[#e3e3e3]" : ""}`}>
+        <button onClick={() => setOpen(!open)} className="mt-0.5 shrink-0">
+          <ChevronRight className={`h-4 w-4 text-[#616161] transition-transform ${open ? "rotate-90" : ""}`} />
+        </button>
+        <div className="min-w-0 flex-1 cursor-pointer" onClick={() => setOpen(!open)}>
           <div className="flex items-center gap-2">
             <p className="truncate text-sm font-medium">{proposal.error_type || "CI failure"}</p>
             <span className={`rounded px-1.5 py-0.5 text-[11px] ${STATUS_TONE[proposal.status] || ""}`}>
@@ -79,8 +83,9 @@ export default function ProposalCard({ proposal, onChange }) {
         </div>
       </div>
 
-      {proposal.pr_number && <PrChecks proposal={proposal} onChange={onChange} />}
+      {open && proposal.pr_number && <PrChecks proposal={proposal} onChange={onChange} />}
 
+      {open && (
       <div className="px-4 py-4">
         {error && <p className="mb-3 text-xs text-[#d72c0d]">{error}</p>}
         {proposal.explanation && (
@@ -100,6 +105,7 @@ export default function ProposalCard({ proposal, onChange }) {
           </pre>
         )}
       </div>
+      )}
     </div>
   );
 }

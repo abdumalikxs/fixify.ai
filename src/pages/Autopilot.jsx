@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { base44 } from "@/api/base44Client";
 import RepoMonitor from "@/components/agent/RepoMonitor";
-import ProposalCard from "@/components/agent/ProposalCard";
+import RepoFixGroup from "@/components/agent/RepoFixGroup";
 
 export default function Autopilot() {
   const [monitored, setMonitored] = useState([]);
@@ -9,6 +9,7 @@ export default function Autopilot() {
   const [loading, setLoading] = useState(true);
   const [scanning, setScanning] = useState(false);
   const [scanError, setScanError] = useState("");
+  const [openRepo, setOpenRepo] = useState("");
 
   const load = useCallback(async () => {
     const [repos, props] = await Promise.all([
@@ -58,7 +59,21 @@ export default function Autopilot() {
             No failures analysed yet. Monitor a repository, then run a scan.
           </p>
         ) : (
-          proposals.map((p) => <ProposalCard key={p.id} proposal={p} onChange={load} />)
+          Object.entries(
+            proposals.reduce((acc, p) => {
+              (acc[p.repo_full_name] = acc[p.repo_full_name] || []).push(p);
+              return acc;
+            }, {})
+          ).map(([repo, list]) => (
+            <RepoFixGroup
+              key={repo}
+              repo={repo}
+              proposals={list}
+              open={openRepo === repo}
+              onToggle={() => setOpenRepo(openRepo === repo ? "" : repo)}
+              onChange={load}
+            />
+          ))
         )}
       </div>
     </div>
