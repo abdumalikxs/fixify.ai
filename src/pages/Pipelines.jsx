@@ -11,13 +11,13 @@ export default function Pipelines() {
   }, []);
 
   return (
-    <div className="mx-auto max-w-5xl space-y-6">
+    <div className="mx-auto max-w-5xl space-y-5">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Pipelines</h1>
-        <p className="mt-1 text-sm text-zinc-500">Every build across connected branches.</p>
+        <h1 className="text-xl font-semibold tracking-tight">Pipelines</h1>
+        <p className="mt-1 text-sm text-[#616161]">Every build across connected branches.</p>
       </div>
       {!deployments ? (
-        <div className="flex h-40 items-center justify-center text-zinc-500">
+        <div className="flex h-40 items-center justify-center text-[#8a8a8a]">
           <Loader2 className="w-5 h-5 animate-spin" />
         </div>
       ) : (

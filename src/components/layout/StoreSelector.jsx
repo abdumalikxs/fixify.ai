@@ -8,15 +8,15 @@ export default function StoreSelector() {
   const [store, setStore] = useState(STORES[0]);
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs text-zinc-200 transition-colors hover:bg-white/[0.06]">
-        <Store className="w-3.5 h-3.5 text-emerald-400" />
+      <DropdownMenuTrigger className="flex items-center gap-2 rounded-lg border border-[#e3e3e3] bg-white px-3 py-1.5 text-xs text-[#1a1a1a] transition-colors hover:bg-[#f6f6f7]">
+        <Store className="w-3.5 h-3.5 text-[#616161]" />
         <span className="max-w-[150px] truncate font-mono sm:max-w-none">{store}</span>
-        <ChevronDown className="w-3.5 h-3.5 text-zinc-500" />
+        <ChevronDown className="w-3.5 h-3.5 text-[#8a8a8a]" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="border-white/10 bg-[#0e1116] text-zinc-200">
+      <DropdownMenuContent align="end" className="border-[#e3e3e3] bg-white">
         {STORES.map((s) => (
-          <DropdownMenuItem key={s} onClick={() => setStore(s)} className="gap-2 font-mono text-xs focus:bg-white/10">
-            <Check className={`w-3.5 h-3.5 ${s === store ? "opacity-100 text-emerald-400" : "opacity-0"}`} />
+          <DropdownMenuItem key={s} onClick={() => setStore(s)} className="gap-2 font-mono text-xs">
+            <Check className={`w-3.5 h-3.5 ${s === store ? "opacity-100 text-[#008060]" : "opacity-0"}`} />
             {s}
           </DropdownMenuItem>
         ))}

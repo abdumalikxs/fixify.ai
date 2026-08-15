@@ -12,36 +12,36 @@ export default function HealedIssues() {
 
   if (!issues) {
     return (
-      <div className="flex h-40 items-center justify-center text-zinc-500">
+      <div className="flex h-40 items-center justify-center text-[#8a8a8a]">
         <Loader2 className="w-5 h-5 animate-spin" />
       </div>
     );
   }
 
   return (
-    <div className="mx-auto max-w-6xl space-y-6">
+    <div className="mx-auto max-w-6xl space-y-5">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Healed issues</h1>
-        <p className="mt-1 text-sm text-zinc-500">Detected theme defects and their agent patches.</p>
+        <h1 className="text-xl font-semibold tracking-tight">Healed issues</h1>
+        <p className="mt-1 text-sm text-[#616161]">Detected theme defects and their agent patches.</p>
       </div>
-      {issues.length === 0 && <p className="text-sm text-zinc-500">No issues detected yet.</p>}
+      {issues.length === 0 && <p className="text-sm text-[#616161]">No issues detected yet.</p>}
       {issues.map((issue) => (
-        <div key={issue.id} className="space-y-4 rounded-2xl border border-white/[0.07] bg-[#0b0d11] p-5">
+        <div key={issue.id} className="space-y-4 rounded-xl border border-[#e3e3e3] bg-white p-5">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-2.5">
               <ShieldCheck
-                className={`w-4 h-4 ${issue.resolution_status === "Unresolved" ? "text-rose-400" : "text-emerald-400"}`}
+                className={`w-4 h-4 ${issue.resolution_status === "Unresolved" ? "text-[#b3260c]" : "text-[#008060]"}`}
               />
               <div>
-                <p className="text-sm text-zinc-200">{issue.error_type}</p>
-                <p className="mt-0.5 font-mono text-[11px] text-zinc-500">{issue.file_path}</p>
+                <p className="text-sm text-[#1a1a1a]">{issue.error_type}</p>
+                <p className="mt-0.5 font-mono text-[11px] text-[#8a8a8a]">{issue.file_path}</p>
               </div>
             </div>
             <span
-              className={`rounded-full px-2.5 py-1 text-[11px] ring-1 ${
+              className={`rounded-full px-2.5 py-0.5 text-[11px] ${
                 issue.resolution_status === "Unresolved"
-                  ? "bg-rose-500/12 text-rose-300 ring-rose-500/25"
-                  : "bg-emerald-500/12 text-emerald-300 ring-emerald-500/25"
+                  ? "bg-[#fdeeeb] text-[#b3260c]"
+                  : "bg-[#e5f5f0] text-[#006b55]"
               }`}
             >
               {issue.resolution_status}

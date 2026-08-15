@@ -60,44 +60,42 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="flex h-64 items-center justify-center text-zinc-500">
+      <div className="flex h-64 items-center justify-center text-[#8a8a8a]">
         <Loader2 className="w-5 h-5 animate-spin" />
       </div>
     );
   }
 
   return (
-    <div className="mx-auto max-w-6xl space-y-6">
-      <div className="flex flex-wrap items-end justify-between gap-4">
+    <div className="mx-auto max-w-6xl space-y-5">
+      <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">Self-healing overview</h1>
-          <p className="mt-1 text-sm text-zinc-500">Agentic monitoring for Shopify theme infrastructure & CI/CD.</p>
+          <h1 className="text-xl font-semibold tracking-tight">Self-healing overview</h1>
+          <p className="mt-1 text-sm text-[#616161]">Agentic monitoring for Shopify theme infrastructure & CI/CD.</p>
         </div>
         <div
-          className={`rounded-full px-4 py-2 text-xs font-medium ring-1 ${
-            healed
-              ? "bg-emerald-500/12 text-emerald-300 ring-emerald-500/25"
-              : "bg-rose-500/12 text-rose-300 ring-rose-500/25"
+          className={`rounded-full px-3 py-1 text-xs font-medium ${
+            healed ? "bg-[#e5f5f0] text-[#006b55]" : "bg-[#fdeeeb] text-[#b3260c]"
           }`}
         >
           {healed
-            ? "🟢 Pipeline Passed & Live Store Synced via Shopify API"
-            : "🔴 CI/CD Pipeline Build Failed: Syntax Error in Shopify Theme JSON"}
+            ? "Pipeline passed & live store synced via Shopify API"
+            : "CI/CD pipeline build failed: syntax error in Shopify theme JSON"}
         </div>
       </div>
 
       <PipelineFeed deployments={deployments} />
 
       {issue && (
-        <div className="space-y-4 rounded-2xl border border-white/[0.07] bg-[#0b0d11] p-5">
+        <div className="space-y-4 rounded-xl border border-[#e3e3e3] bg-white p-5">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <h2 className="text-sm font-semibold tracking-tight">{issue.error_type}</h2>
-              <p className="mt-0.5 font-mono text-[11px] text-zinc-500">
+              <h2 className="text-sm font-medium">{issue.error_type}</h2>
+              <p className="mt-0.5 font-mono text-[11px] text-[#8a8a8a]">
                 {issue.store_name} · {issue.file_path}
               </p>
             </div>
-            <span className="rounded-md bg-white/[0.06] px-2.5 py-1 font-mono text-[11px] text-zinc-400">
+            <span className="rounded-full bg-[#f1f1f1] px-2.5 py-0.5 font-mono text-[11px] text-[#616161]">
               {issue.resolution_status}
             </span>
           </div>
@@ -108,17 +106,17 @@ export default function Dashboard() {
 
           <div className="flex justify-end">
             {healed ? (
-              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs text-emerald-300">
+              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs text-[#006b55]">
                 Patch pushed to main and synced to the live storefront.
               </motion.p>
             ) : (
               <Button
                 onClick={runHealer}
                 disabled={running}
-                className="bg-gradient-to-r from-amber-400 to-orange-500 text-black hover:from-amber-300 hover:to-orange-400"
+                className="rounded-lg bg-[#1a1a1a] text-white hover:bg-[#303030]"
               >
                 {running ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-                🤖 Run Agentic Self-Healer & Push Fix
+                Run agentic self-healer & push fix
               </Button>
             )}
           </div>
