@@ -1,0 +1,52 @@
+{
+  "name": "ThemeIssue",
+  "type": "object",
+  "properties": {
+    "source": {
+      "type": "string"
+    },
+    "file_path": {
+      "type": "string"
+    },
+    "issue_type": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "broken_code": {
+      "type": "string"
+    },
+    "fixed_code": {
+      "type": "string"
+    },
+    "explanation": {
+      "type": "string"
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Detected",
+        "Healed"
+      ],
+      "default": "Detected"
+    },
+    "healed_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "file_path",
+    "issue_type",
+    "status"
+  ]
+}

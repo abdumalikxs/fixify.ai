@@ -19,6 +19,7 @@ import Autopilot from '@/pages/Autopilot';
 import Shops from '@/pages/Shops';
 import ShopDetail from '@/pages/ShopDetail';
 import HealedIssues from '@/pages/HealedIssues';
+import ThemeAudit from '@/pages/ThemeAudit';
 import Settings from '@/pages/Settings';
 import Store from '@/pages/Store';
 
@@ -60,6 +61,7 @@ const AuthenticatedApp = () => {
           <Route path="/shops" element={<Shops />} />
           <Route path="/shops/:id" element={<ShopDetail />} />
           <Route path="/healed" element={<HealedIssues />} />
+          <Route path="/theme-audit" element={<ThemeAudit />} />
           <Route path="/settings" element={<Settings />} />
         </Route>
         <Route path="/store" element={<Store />} />
