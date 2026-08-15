@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
 import { LayoutDashboard, GitBranch, Settings, Menu, X, Bot, Store, Glasses, FileJson } from "lucide-react";
-import StoreSelector from "./StoreSelector";
 
 const sections = [
   {
@@ -44,7 +43,6 @@ export default function AppLayout() {
           <span className="font-normal">autopilot</span>
         </Link>
         <div className="ml-auto flex items-center gap-3">
-          <StoreSelector />
           <div className="hidden items-center gap-2 rounded-full border border-[#3d444d] px-2.5 py-1 text-[11px] text-[#c8d1d9] sm:flex">
             <span className="h-1.5 w-1.5 rounded-full bg-[#3fb950]" />
             Agent online
