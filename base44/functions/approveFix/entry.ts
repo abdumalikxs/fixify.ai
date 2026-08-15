@@ -20,7 +20,7 @@ export default async function(req) {
     const baseBranch = proposal.branch || 'main';
     const current = await getFileContent(token, proposal.repo_full_name, proposal.file_path, baseBranch);
 
-    const { pr_url, branch } = await openFixPullRequest(token, proposal.repo_full_name, {
+    const { pr_url, pr_number, branch, checks_enabled_in } = await openFixPullRequest(token, proposal.repo_full_name, {
       baseBranch,
       filePath: proposal.file_path,
       newContent: proposal.proposed_code,
@@ -29,8 +29,8 @@ export default async function(req) {
       body: `Automated fix proposed by Fixify.AI and approved by ${user.email}.\n\n**Failing run:** ${proposal.run_url}\n**Diagnosis:** ${proposal.failure_summary || ''}\n\n**What changed:** ${proposal.explanation || ''}`
     });
 
-    await base44.entities.FixProposal.update(proposal_id, { status: 'Approved', pr_url });
-    return Response.json({ pr_url, branch });
+    await base44.entities.FixProposal.update(proposal_id, { status: 'Approved', pr_url, pr_number });
+    return Response.json({ pr_url, pr_number, branch, checks_enabled_in });
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
   }

@@ -60,6 +60,7 @@
       "enum": [
         "Proposed",
         "Approved",
+        "Merged",
         "Dismissed",
         "Diagnosis only"
       ],
@@ -67,6 +68,16 @@
     },
     "pr_url": {
       "type": "string"
+    },
+    "pr_number": {
+      "type": "number"
+    },
+    "merge_commit_sha": {
+      "type": "string"
+    },
+    "merged_at": {
+      "type": "string",
+      "format": "date-time"
     }
   },
   "required": [

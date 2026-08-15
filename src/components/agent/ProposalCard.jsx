@@ -3,10 +3,12 @@ import { base44 } from "@/api/base44Client";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Check, X } from "lucide-react";
 import DiffViewer from "@/components/dashboard/DiffViewer";
+import PrChecks from "@/components/agent/PrChecks";
 
 const STATUS_TONE = {
   Proposed: "bg-[#fff1e3] text-[#8a5300]",
   Approved: "bg-[#e6f4ec] text-[#008060]",
+  Merged: "bg-[#e6f4ec] text-[#008060]",
   Dismissed: "bg-[#f1f1f1] text-[#616161]",
   "Diagnosis only": "bg-[#f1f1f1] text-[#616161]",
 };
@@ -76,6 +78,8 @@ export default function ProposalCard({ proposal, onChange }) {
           )}
         </div>
       </div>
+
+      {proposal.pr_number && <PrChecks proposal={proposal} onChange={onChange} />}
 
       <div className="px-4 py-4">
         {error && <p className="mb-3 text-xs text-[#d72c0d]">{error}</p>}
