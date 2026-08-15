@@ -17,18 +17,20 @@ export default function AppLayout() {
   const { pathname } = useLocation();
 
   return (
-    <div className="min-h-screen bg-[#f6f6f7] text-[#1a1a1a] font-body">
-      <header className="sticky top-0 z-40 flex items-center gap-4 border-b border-[#e3e3e3] bg-white px-4 py-3 sm:px-6">
-        <button className="lg:hidden text-[#616161]" onClick={() => setOpen(!open)}>
+    <div className="min-h-screen bg-[#f6f8fa] text-[#1f2328] font-body">
+      <header className="sticky top-0 z-40 flex items-center gap-4 bg-[#24292f] px-4 py-2.5 text-[#f0f6fc] sm:px-6">
+        <button className="lg:hidden text-[#c8d1d9]" onClick={() => setOpen(!open)}>
           {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
-        <Link to="/" className="text-[15px] font-semibold tracking-tight">
-          Fixify<span className="text-[#008060]">.AI</span>
+        <Link to="/" className="flex items-center gap-2 text-sm font-semibold tracking-tight">
+          <Bot className="h-5 w-5" />
+          Fixify<span className="font-normal text-[#8b949e]">/</span>
+          <span className="font-normal">autopilot</span>
         </Link>
         <div className="ml-auto flex items-center gap-3">
           <StoreSelector />
-          <div className="hidden items-center gap-2 text-xs text-[#616161] sm:flex">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#008060]" />
+          <div className="hidden items-center gap-2 rounded-full border border-[#3d444d] px-2.5 py-1 text-[11px] text-[#c8d1d9] sm:flex">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#3fb950]" />
             Agent online
           </div>
         </div>
@@ -36,11 +38,11 @@ export default function AppLayout() {
 
       <div className="flex">
         <aside
-          className={`fixed inset-y-0 left-0 z-30 w-56 shrink-0 border-r border-[#e3e3e3] bg-white px-3 pt-20 transition-transform duration-200 lg:sticky lg:top-[57px] lg:h-[calc(100vh-57px)] lg:translate-x-0 lg:pt-5 ${
+          className={`fixed inset-y-0 left-0 z-30 w-60 shrink-0 border-r border-[#d1d9e0] bg-white px-2 pt-20 transition-transform duration-200 lg:sticky lg:top-[49px] lg:h-[calc(100vh-49px)] lg:translate-x-0 lg:pt-4 ${
             open ? "translate-x-0" : "-translate-x-full"
           }`}
         >
-          <nav className="space-y-0.5">
+          <nav className="space-y-px">
             {nav.map(({ label, path, icon: Icon }) => {
               const active = pathname === path;
               return (
@@ -48,11 +50,16 @@ export default function AppLayout() {
                   key={path}
                   to={path}
                   onClick={() => setOpen(false)}
-                  className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors ${
-                    active ? "bg-[#f1f1f1] font-medium text-[#1a1a1a]" : "text-[#616161] hover:bg-[#f6f6f7]"
+                  className={`relative flex items-center gap-2.5 rounded-md px-3 py-1.5 text-sm transition-colors ${
+                    active
+                      ? "bg-[#f6f8fa] font-semibold text-[#1f2328]"
+                      : "text-[#1f2328] hover:bg-[#f6f8fa]"
                   }`}
                 >
-                  <Icon className="w-4 h-4" />
+                  {active && (
+                    <span className="absolute left-0 top-1.5 bottom-1.5 w-[3px] rounded-full bg-[#fd8c73]" />
+                  )}
+                  <Icon className={`h-4 w-4 ${active ? "text-[#1f2328]" : "text-[#59636e]"}`} />
                   {label}
                 </Link>
               );
@@ -61,7 +68,9 @@ export default function AppLayout() {
         </aside>
 
         <main className="min-w-0 flex-1 px-4 py-6 sm:px-8">
-          <Outlet />
+          <div className="mx-auto max-w-[1280px]">
+            <Outlet />
+          </div>
         </main>
       </div>
     </div>
