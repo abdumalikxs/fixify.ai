@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { base44 } from "@/api/base44Client";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, GitMerge, Loader2, RefreshCw, XCircle } from "lucide-react";
+import { CheckCircle2, GitMerge, Loader2, RefreshCw, XCircle, Wand2 } from "lucide-react";
 
 const TONE = {
   passing: { label: "All checks passed", cls: "text-[#008060]", Icon: CheckCircle2 },
@@ -29,6 +29,20 @@ export default function PrChecks({ proposal, onChange }) {
     const t = setInterval(load, 15000);
     return () => clearInterval(t);
   }, [load]);
+
+  const retry = async () => {
+    setBusy(true);
+    setError("");
+    try {
+      const res = await base44.functions.invoke("retryFix", { proposal_id: proposal.id });
+      if (!res.data?.retried) setError(res.data?.explanation || "The agent could not revise the fix.");
+      onChange();
+      await load();
+    } catch (e) {
+      setError(e?.response?.data?.error || "Could not run a retry.");
+    }
+    setBusy(false);
+  };
 
   const merge = async () => {
     setBusy(true);
@@ -67,10 +81,16 @@ export default function PrChecks({ proposal, onChange }) {
             {c.name}: {c.conclusion || c.status}
           </a>
         ))}
+        {!status.merged && !status.closed && status.state === "failing" && (
+          <Button size="sm" variant="outline" className="ml-auto" onClick={retry} disabled={busy}>
+            <Wand2 className="mr-1 h-3.5 w-3.5" />
+            {busy ? "Agent retrying" : `Retry fix${proposal.retry_count ? ` (${proposal.retry_count}/3)` : ""}`}
+          </Button>
+        )}
         {!status.merged && !status.closed && (
           <Button
             size="sm"
-            className="ml-auto"
+            className={status.state === "failing" ? "" : "ml-auto"}
             onClick={merge}
             disabled={busy || status.state === "pending" || status.state === "failing"}
           >

@@ -57,6 +57,11 @@ export async function listFailedRuns(token, repo, perPage = 5) {
   return data.workflow_runs || [];
 }
 
+export async function listRunsForSha(token, repo, sha) {
+  const data = await gh(token, `/repos/${repo}/actions/runs?head_sha=${encodeURIComponent(sha)}&per_page=10`);
+  return data.workflow_runs || [];
+}
+
 export async function getRun(token, repo, runId) {
   return gh(token, `/repos/${repo}/actions/runs/${runId}`);
 }
@@ -94,7 +99,7 @@ function encodeContent(text) {
   return btoa(String.fromCharCode(...new TextEncoder().encode(text)));
 }
 
-async function commitFile(token, repo, { branch, path, content, sha, message }) {
+export async function commitFile(token, repo, { branch, path, content, sha, message }) {
   await gh(token, `/repos/${repo}/contents/${encodeURI(path)}`, {
     method: "PUT",
     body: JSON.stringify({ message, content: encodeContent(content), branch, ...(sha ? { sha } : {}) }),
@@ -162,6 +167,8 @@ export async function getPullRequestStatus(token, repo, prNumber) {
   return {
     pr_number: pr.number,
     pr_url: pr.html_url,
+    head_branch: pr.head.ref,
+    head_sha: pr.head.sha,
     merged: pr.merged,
     closed: pr.state === "closed",
     mergeable_state: pr.mergeable_state,

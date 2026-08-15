@@ -78,6 +78,13 @@
     "merged_at": {
       "type": "string",
       "format": "date-time"
+    },
+    "retry_count": {
+      "type": "number",
+      "default": 0
+    },
+    "retry_log": {
+      "type": "string"
     }
   },
   "required": [
