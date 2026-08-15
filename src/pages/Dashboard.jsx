@@ -31,7 +31,8 @@ export default function Dashboard() {
     );
   }
 
-  const open = proposals.filter((p) => p.status === "Proposed" || p.status === "Approved");
+  const open = proposals.filter((p) => p.status === "Proposed");
+  const inFlight = proposals.filter((p) => p.status === "Approved");
   const merged = proposals.filter((p) => p.status === "Merged");
   const themeChecked = repos.filter((r) => r.theme_check_enabled);
 
@@ -54,7 +55,7 @@ export default function Dashboard() {
         <StatCard
           label="Fixes awaiting review"
           value={open.length}
-          hint="drafted from real CI logs"
+          hint={inFlight.length ? `${inFlight.length} approved PR${inFlight.length === 1 ? "" : "s"} awaiting merge` : "drafted from real CI logs"}
           Icon={AlertTriangle}
           tone={open.length ? "text-[#8a5300]" : "text-[#1a1a1a]"}
         />
